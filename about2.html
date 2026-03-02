@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Real Estate Ventures</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./nav2.css" />
+    <link rel="stylesheet" href="./footer22.css" />
+    <style>
+      :root {
+        --primary-red: #ff4d44;
+        --text-dark: #1a1a1a;
+        --text-grey: #666666;
+        --bg-dark: #12121d;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Hero Section */
+      .re-hero {
+        position: relative;
+        height: 480px;
+        background-image: url("./files/h11.webp");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      }
+
+      .re-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(18, 18, 29, 0.75);
+      }
+
+      .re-hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .re-hero-content h1 {
+        font-size: clamp(36px, 8vw, 56px);
+        font-weight: 800;
+        margin-bottom: 15px;
+      }
+
+      .re-breadcrumb {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .re-breadcrumb span:first-child {
+        color: var(--primary-red);
+      }
+
+      /* Who We Are Section */
+      .re-who {
+        padding: clamp(60px, 10vw, 100px) 0;
+      }
+
+      .re-grid-two {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px;
+      }
+
+      .re-col {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .re-label-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .re-label {
+        color: var(--primary-red);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      .re-label-line {
+        width: 40px;
+        height: 1.5px;
+        background: var(--primary-red);
+      }
+
+      .re-title-large {
+        font-size: clamp(28px, 5vw, 42px);
+        line-height: 1.2;
+        font-weight: 800;
+        margin-bottom: 40px;
+      }
+
+      .re-who-image-main {
+        border-radius: 20px;
+        margin-bottom: 30px;
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+      }
+
+      .re-feature-item {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .re-feature-icon {
+        width: 50px;
+        height: 50px;
+        background: #fff5f5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .re-feature-icon svg {
+        width: 24px;
+        height: 24px;
+        color: var(--primary-red);
+      }
+
+      .re-feature-content h4 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .re-feature-content p {
+        color: var(--text-grey);
+        font-size: 15px;
+      }
+
+      .re-para-muted {
+        color: var(--text-grey);
+        font-size: 16px;
+        margin-bottom: 25px;
+      }
+
+      .re-rounded-img-alt {
+        border-radius: 30px;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+
+      .re-contact-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .re-call-box {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .re-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .re-call-info p {
+        font-size: 13px;
+        color: var(--text-grey);
+        margin: 0;
+      }
+
+      .re-call-info h5 {
+        font-size: 18px;
+        color: var(--primary-red);
+        font-weight: 700;
+      }
+
+      /* Button Animation Rule */
+      .re-btn-fill {
+        position: relative;
+        background: var(--primary-red);
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1;
+        transition: color 0.3s ease;
+      }
+
+      .re-btn-fill::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: #d43d35;
+        z-index: -1;
+        transition: var(--transition);
+      }
+
+      .re-btn-fill:hover::before {
+        width: 100%;
+      }
+
+      /* Stats Section */
+      .re-stats {
+        background-color: var(--bg-dark);
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L90 10L90 90L10 90Z' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+        padding: 80px 0;
+        color: white;
+      }
+
+      .re-stats-grid {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .re-stat-item {
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 0;
+      }
+
+      .re-stat-item:last-child {
+        border-right: none;
+      }
+
+      .re-stat-number {
+        font-size: clamp(32px, 5vw, 48px);
+        font-weight: 800;
+        margin-bottom: 5px;
+      }
+
+      .re-stat-number span {
+        color: var(--primary-red);
+      }
+
+      .re-stat-label {
+        font-size: 14px;
+        text-transform: capitalize;
+        opacity: 0.8;
+      }
+
+      /* Steps Sections */
+      .re-step-section {
+        padding: clamp(60px, 10vw, 100px) 0;
+      }
+
+      .re-step-flex {
+        display: flex;
+        align-items: center;
+        gap: clamp(30px, 6vw, 80px);
+      }
+
+      .re-step-reverse {
+        flex-direction: row-reverse;
+      }
+
+      .re-step-content {
+        flex: 1;
+        display: flex;
+        gap: clamp(15px, 3vw, 30px);
+      }
+
+      .re-vertical-label {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        color: var(--primary-red);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-right: 1px solid #eee;
+        padding-bottom: 15px;
+        white-space: nowrap;
+      }
+
+      .re-step-num {
+        font-size: clamp(50px, 10vw, 82px);
+        font-weight: 800;
+        color: var(--primary-red);
+        line-height: 1;
+        margin-bottom: 20px;
+      }
+
+      .re-step-title {
+        font-size: clamp(24px, 4vw, 32px);
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .re-step-image {
+        flex: 1;
+        width: 100%;
+      }
+
+      .re-step-image img {
+        border-radius: 25px;
+        width: 100%;
+        height: clamp(300px, 50vh, 450px);
+        object-fit: cover;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Responsive Fixes */
+      @media (max-width: 992px) {
+        .re-grid-two {
+          flex-direction: column;
+        }
+        .re-step-flex,
+        .re-step-flex.re-step-reverse {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .re-step-image {
+          width: 100%;
+        }
+        .re-stat-item {
+          flex: 0 0 50%;
+          border-right: none;
+        }
+        .re-stat-item:nth-child(odd) {
+          border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .re-stats-grid {
+          flex-direction: column;
+        }
+        .re-stat-item {
+          flex: 0 0 100%;
+          border-right: none !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .re-stat-item:last-child {
+          border-bottom: none;
+        }
+        .re-step-content {
+          flex-direction: row; /* Keep vertical label on side if possible, or stack */
+        }
+        .re-vertical-label {
+          writing-mode: vertical-rl;
+          font-size: 10px;
+        }
+        .re-contact-footer {
+          justify-content: center;
+          text-align: center;
+        }
+        .re-call-box {
+          flex-direction: column;
+        }
+        .re-btn-fill {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="./home2.html">
+          <img src="./assets/logo.webp" alt="Logo" class="logo" id="logo-img" />
+        </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="./index.html" class="nav-link">
+              Home
+              <svg class="dropdown-icon" viewBox="0 0 20 20">
+                <path
+                  d="M5 7l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="./index.html">Home 1</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="./home2.html">Home 2</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="./services2.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about2.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog2.html" class="nav-link">Insights</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact2.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+      <button class="mobile-close" id="mobileClose">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M18 6L6 18M6 6L18 18"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <ul class="mobile-menu">
+        <li class="mobile-menu-item" style="transition-delay: 0.1s">
+          <a href="#" class="mobile-menu-link" id="mobileHomeToggle">Home +</a>
+          <ul class="mobile-submenu" id="mobileHomeSub">
+            <li>
+              <a href="./index.html" class="mobile-submenu-link">Home 1</a>
+            </li>
+            <li>
+              <a href="./home2.html" class="mobile-submenu-link">Home 2</a>
+            </li>
+          </ul>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.2s">
+          <a href="./services2.html" class="mobile-menu-link">Services</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.3s">
+          <a href="./about2.html" class="mobile-menu-link">About</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.4s">
+          <a href="./blog2.html" class="mobile-menu-link">Insights</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.5s">
+          <a href="./contact2.html" class="mobile-menu-link">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <!-- SECTION 1: HERO -->
+    <header class="re-hero">
+      <div class="re-hero-content">
+        <h1>About Us</h1>
+        <div class="re-breadcrumb">
+          <span>Home</span> » <span>About Us</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 2: WHO WE ARE -->
+    <section class="re-who">
+      <div class="container">
+        <div class="re-grid-two">
+          <div class="re-col">
+            <div class="re-label-container">
+              <span class="re-label">WHO WE ARE</span>
+              <div class="re-label-line"></div>
+            </div>
+            <h2 class="re-title-large">
+              We created historic real estate ventures.
+            </h2>
+
+            <img
+              src="./files/about1.webp"
+              alt="Building"
+              class="re-who-image-main"
+            />
+
+            <div class="re-feature-item">
+              <div class="re-feature-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  ></path>
+                </svg>
+              </div>
+              <div class="re-feature-content">
+                <h4>Corporate Responsibility</h4>
+                <p>
+                  Our goal is zero incidents and our lost time frequency rate is
+                  industry leading.
+                </p>
+              </div>
+            </div>
+
+            <div class="re-feature-item">
+              <div class="re-feature-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="re-feature-content">
+                <h4>Experts with Team Spirit</h4>
+                <p>
+                  Our goal is zero incidents and our lost time frequency rate is
+                  industry leading.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="re-col">
+            <p class="re-para-muted">
+              we bring decades of experience to real estate strategy, advisory,
+              and development. As one of the world's largest privately held real
+              estate groups, we deliver tailored solutions that align with your
+              long-term vision.
+            </p>
+            <p class="re-para-muted">
+              we bring decades of experience to real estate strategy, advisory,
+              and development. As one of the world's largest privately held real
+              estate groups, we deliver tailored solutions that align with your
+              long-term vision.
+            </p>
+
+            <img
+              src="./files/in6.webp"
+              alt="Real Estate"
+              class="re-rounded-img-alt"
+            />
+
+            <div class="re-contact-footer">
+              <div class="re-call-box">
+                <img src="./files/in5.webp" alt="Expert" class="re-avatar" />
+                <div class="re-call-info">
+                  <p>Call Us For Any Inquiry</p>
+                  <h5>+258-5485-4845</h5>
+                </div>
+              </div>
+              <a href="./4042.html" style="text-decoration: none">
+                <button class="re-btn-fill">
+                  Learn More <span>→</span>
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DARK STATS -->
+    <section class="re-stats">
+      <div class="container">
+        <div class="re-stats-grid">
+          <div class="re-stat-item">
+            <div class="re-stat-number">
+              <span class="count" data-target="145">0</span><span>+</span>
+            </div>
+            <div class="re-stat-label">Completed Projects</div>
+          </div>
+          <div class="re-stat-item">
+            <div class="re-stat-number">
+              <span class="count" data-target="129">0</span><span>+</span>
+            </div>
+            <div class="re-stat-label">Happy Clients</div>
+          </div>
+          <div class="re-stat-item">
+            <div class="re-stat-number">
+              <span class="count" data-target="4.3" data-decimal="1">0</span
+              ><span>B+</span>
+            </div>
+            <div class="re-stat-label">Annual Revenue</div>
+          </div>
+          <div class="re-stat-item">
+            <div class="re-stat-number">
+              <span class="count" data-target="25">0</span><span>M+</span>
+            </div>
+            <div class="re-stat-label">Square Feet Sold</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: STEP 01 -->
+    <section class="re-step-section">
+      <div class="container">
+        <div class="re-step-flex">
+          <div class="re-step-content">
+            <div class="re-vertical-label">Our Trusted Real Estate</div>
+            <div>
+              <div class="re-step-num">01</div>
+              <h3 class="re-step-title">Find your future home</h3>
+              <p class="re-para-muted">
+                There are many variations of passages of Real Estate available,
+                but the majority have suffered alteration in some form, by
+                injected humour, or randomised words which don't look even
+                slightly believable.
+              </p>
+            </div>
+          </div>
+          <div class="re-step-image">
+            <img src="./files/in01.webp" alt="Home 1" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: STEP 02 (Reverse) -->
+    <section class="re-step-section" style="background: #fafafa">
+      <div class="container">
+        <div class="re-step-flex re-step-reverse">
+          <div class="re-step-content">
+            <div class="re-vertical-label">Our Trusted Real Estate</div>
+            <div>
+              <div class="re-step-num">02</div>
+              <h3 class="re-step-title">Experienced agents</h3>
+              <p class="re-para-muted">
+                There are many variations of passages of Real Estate available,
+                but the majority have suffered alteration in some form, by
+                injected humour, or randomised words which don't look even
+                slightly believable.
+              </p>
+            </div>
+          </div>
+          <div class="re-step-image">
+            <img src="./files/b3.webp" alt="Home 2" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: STEP 03 -->
+    <section class="re-step-section">
+      <div class="container">
+        <div class="re-step-flex">
+          <div class="re-step-content">
+            <div class="re-vertical-label">Our Trusted Real Estate</div>
+            <div>
+              <div class="re-step-num">03</div>
+              <h3 class="re-step-title">Buy or rent homes</h3>
+              <p class="re-para-muted">
+                There are many variations of passages of Real Estate available,
+                but the majority have suffered alteration in some form, by
+                injected humour, or randomised words which don't look even
+                slightly believable.
+              </p>
+            </div>
+          </div>
+          <div class="re-step-image">
+            <img src="./files/in04.webp" alt="Home 3" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <img
+              src="./assets/logo.webp"
+              alt="Company Logo"
+              class="footer-logo"
+            />
+            <p class="footer-description">
+              Excellence in construction and real estate services. We provide
+              high-quality residential and commercial solutions worldwide.
+            </p>
+            <div class="social-links">
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path
+                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                  ></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="./home2.html">Home</a></li>
+              <li><a href="./services2.html">Services</a></li>
+              <li><a href="./blog2.html">Insights</a></li>
+              <li><a href="./about2.html">About</a></li>
+              <li><a href="./contact2.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Contact Us</h4>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>18/A, New Born Town Hall<br />New York, US</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span>info@company.com</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path>
+              </svg>
+              <span>+0123-456789</span>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Newsletter</h4>
+            <p class="newsletter-desc">
+              Subscribe to receive latest updates and property news.
+            </p>
+            <form class="newsletter-form" action="./4042.html">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" class="btn-subscribe">SUBSCRIBE</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">© 2025 Company Name. All Rights Reserved.</p>
+          <div class="legal-links">
+            <a href="./4042.html">Privacy Policy</a>
+            <a href="./4042.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="./nav2.js"></script>
+    <script>
+      // Number Counting Animation
+      function animateValue(obj, start, end, duration, decimals = 0) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const value = progress * (end - start) + start;
+          obj.innerHTML = value.toFixed(decimals);
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      const observerOptions = {
+        threshold: 0.5,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const endValue = parseFloat(target.getAttribute("data-target"));
+            const decimals = parseInt(
+              target.getAttribute("data-decimal") || "0",
+            );
+            animateValue(target, 0, endValue, 2000, decimals);
+            observer.unobserve(target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".count").forEach((count) => {
+        observer.observe(count);
+      });
+    </script>
+  </body>
+</html>

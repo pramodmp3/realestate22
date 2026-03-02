@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Construction - Leading the Way in Building</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./nav2.css" />
+    <link rel="stylesheet" href="./footer22.css" />
+    <style>
+      :root {
+        --yellow: #ff4929;
+        --dark: #1a1a1a;
+        --text-gray: #666;
+        --light-bg: #f9f9f9;
+        --white: #ffffff;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      h1,
+      h2,
+      h3,
+      .heading-serif {
+        font-family: "Playfair Display", serif;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* --- BUTTONS WITH LEFT-FILL ANIMATION --- */
+      .btn {
+        display: inline-block;
+        padding: 14px 35px;
+        background: var(--yellow);
+        color: #000;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        border: none;
+        cursor: pointer;
+        transition: color 0.4s;
+        text-align: center;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: -1;
+        transition: left 0.4s ease-in-out;
+      }
+
+      .btn:hover {
+        color: #fff;
+      }
+
+      .btn:hover::before {
+        left: 0;
+      }
+
+      /* --- SECTION 1: HERO SLIDER --- */
+      .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 5;
+      }
+
+      .slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        color: #fff;
+        max-width: 90%;
+        width: 800px;
+        padding: 20px;
+      }
+
+      .hero-content h1 {
+        font-size: clamp(32px, 8vw, 80px);
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        line-height: 1.1;
+      }
+
+      .hero-content p {
+        font-size: clamp(16px, 4vw, 20px);
+        margin-bottom: 35px;
+        font-weight: 300;
+      }
+
+      .slider-dots {
+        position: absolute;
+        bottom: 40px;
+        right: 50%;
+        transform: translateX(50%);
+        display: flex;
+        gap: 15px;
+        z-index: 20;
+      }
+
+      @media (min-width: 768px) {
+        .slider-dots {
+          right: 50px;
+          transform: none;
+        }
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .dot.active {
+        background: #fff;
+      }
+
+      /* --- SECTION 2: SERVICES --- */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        text-align: center;
+        background: #fff;
+        padding-bottom: 20px;
+      }
+
+      .service-card img {
+        width: 100%;
+        aspect-ratio: 16/10;
+        object-fit: cover;
+        margin-bottom: 25px;
+      }
+
+      .service-card h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        padding: 0 20px;
+      }
+
+      .service-card p {
+        color: var(--text-gray);
+        margin-bottom: 25px;
+        padding: 0 25px;
+      }
+
+      /* --- SECTION 3: RECENT WORKS --- */
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 0 20px;
+      }
+
+      .section-header h2 {
+        font-size: clamp(28px, 5vw, 36px);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--yellow);
+      }
+
+      .filter-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        padding: 0 20px;
+      }
+
+      .filter-tab {
+        padding: 8px 18px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        transition: var(--transition);
+        border: 1px solid transparent;
+      }
+
+      .filter-tab.active {
+        background: var(--yellow);
+        color: #000;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+
+      @media (min-width: 1024px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .portfolio-item {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1/1;
+      }
+
+      .portfolio-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s;
+      }
+
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: var(--transition);
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .portfolio-item:hover img {
+        transform: scale(1.1);
+      }
+      .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+      }
+
+      /* --- SECTION 4: TESTIMONIALS --- */
+      .testimonials {
+        background: var(--light-bg);
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .testimonial-card {
+        text-align: left;
+      }
+
+      .bubble {
+        background: #fff;
+        padding: 30px;
+        border-radius: 4px;
+        position: relative;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        font-style: italic;
+        color: var(--text-gray);
+        font-size: 14px;
+      }
+
+      .bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 30px;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #fff;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-left: 10px;
+      }
+
+      .user-info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* --- SECTION 5: WHY CHOOSE US --- */
+      .why-us {
+        padding: 0;
+      }
+      .why-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 992px) {
+        .why-container {
+          flex-direction: row;
+          align-items: stretch;
+        }
+      }
+
+      .why-img {
+        flex: 1;
+        min-height: 400px;
+      }
+      .why-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .why-content {
+        flex: 1;
+        padding: 60px 20px;
+      }
+
+      @media (min-width: 768px) {
+        .why-content {
+          padding: 80px 50px;
+        }
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 10px;
+      }
+
+      .accordion-header {
+        padding: 18px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fdfdfd;
+        transition: var(--transition);
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .accordion-header.active {
+        background: var(--yellow);
+      }
+
+      .accordion-content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.4s ease,
+          padding 0.4s ease;
+        color: var(--text-gray);
+        font-size: 14px;
+      }
+
+      .accordion-item.active .accordion-content {
+        max-height: 200px;
+        padding: 20px 18px;
+      }
+
+      /* --- SECTION 6: APARTMENT PLAN --- */
+      .plan-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 50px;
+        border-bottom: 1px solid #eee;
+        flex-wrap: wrap;
+        padding: 0 10px;
+      }
+
+      .plan-tab {
+        padding-bottom: 15px;
+        cursor: pointer;
+        position: relative;
+        font-weight: 500;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      .plan-tab.active {
+        color: #ff4d29;
+      }
+      .plan-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #ff4d29;
+      }
+
+      .plan-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      @media (min-width: 992px) {
+        .plan-flex {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+
+      .plan-info {
+        flex: 1;
+        background: #ff4d29;
+        color: #fff;
+        padding: 40px 30px;
+        border-radius: 4px;
+      }
+
+      @media (min-width: 768px) {
+        .plan-info {
+          padding: 60px;
+        }
+      }
+
+      .plan-info h3 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .plan-info p {
+        margin-bottom: 30px;
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      .plan-details {
+        list-style: none;
+      }
+      .plan-details li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        position: relative;
+        font-size: 14px;
+      }
+
+      .plan-details li::after {
+        content: "................................................................................";
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        opacity: 0.3;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .plan-details span {
+        background: #ff4d29;
+        z-index: 1;
+        position: relative;
+        padding: 0 5px;
+      }
+
+      .plan-image {
+        flex: 1.2;
+      }
+      .plan-image img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* --- SECTION 7: LATEST NEWS --- */
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .blog-card {
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .blog-card:hover {
+        transform: translateY(-10px);
+      }
+      .blog-img-wrap {
+        overflow: hidden;
+        aspect-ratio: 16/10;
+      }
+      .blog-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s;
+      }
+
+      .blog-content {
+        padding: 25px;
+      }
+      .blog-meta {
+        font-size: 12px;
+        color: var(--text-gray);
+        margin-bottom: 15px;
+        display: flex;
+        gap: 15px;
+      }
+      .blog-card h4 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+      }
+      .blog-footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .read-more-link {
+        color: #ff4d29;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      /* --- SECTION 8: STATS --- */
+      .stats {
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+          url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1920")
+            no-repeat center center fixed;
+        background-size: cover;
+        padding: 80px 0;
+        color: #fff;
+        text-align: center;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
+      }
+
+      @media (min-width: 768px) {
+        .stats-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .stat-item h2 {
+        font-size: clamp(32px, 5vw, 48px);
+        color: var(--yellow);
+        margin-bottom: 10px;
+      }
+      .stat-item p {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* --- BACK TO TOP --- */
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--yellow);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        font-size: 10px;
+        z-index: 100;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="./home2.html">
+          <img src="./assets/logo.webp" alt="Logo" class="logo" id="logo-img" />
+        </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="./index.html" class="nav-link">
+              Home
+              <svg class="dropdown-icon" viewBox="0 0 20 20">
+                <path
+                  d="M5 7l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="./index.html">Home 1</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="./home2.html">Home 2</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="./services2.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about2.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog2.html" class="nav-link">Insights</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact2.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+      <button class="mobile-close" id="mobileClose">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M18 6L6 18M6 6L18 18"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <ul class="mobile-menu">
+        <li class="mobile-menu-item" style="transition-delay: 0.1s">
+          <a href="#" class="mobile-menu-link" id="mobileHomeToggle">Home +</a>
+          <ul class="mobile-submenu" id="mobileHomeSub">
+            <li>
+              <a href="./index.html" class="mobile-submenu-link">Home 1</a>
+            </li>
+            <li>
+              <a href="./home2.html" class="mobile-submenu-link">Home 2</a>
+            </li>
+          </ul>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.2s">
+          <a href="./services2.html" class="mobile-menu-link">Services</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.3s">
+          <a href="./about2.html" class="mobile-menu-link">About</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.4s">
+          <a href="./blog2.html" class="mobile-menu-link">Insights</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.5s">
+          <a href="./contact2.html" class="mobile-menu-link">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <!-- SECTION 1: HERO SLIDER -->
+    <section class="hero">
+      <div class="slide active" style="background-image: url(./files/in9.webp)">
+        <div class="hero-content">
+          <h1>THE CONSTRUCTION</h1>
+          <p>Leading the way in building</p>
+          <a href="./services2.html" class="btn">Our Portfolio</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url(./files/inl2.webp)">
+        <div class="hero-content">
+          <h1>THE BEST COMPANY</h1>
+          <p>
+            We are professional company over 20 year of experience.<br />We will
+            brighten up every corner of your house.
+          </p>
+          <a href="./contact2.html" class="btn">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="slider-dots">
+        <div class="dot active" onclick="setSlide(0)"></div>
+        <div class="dot" onclick="setSlide(1)"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SERVICES -->
+    <section class="services">
+      <div class="container">
+        <div class="services-grid">
+          <div class="service-card">
+            <img src="./files/in1.webp" alt="Consultant" />
+            <h3>Construction Consultant</h3>
+            <p>
+              Sed sit amet sapien sit amet odio lobortis ullamcorper quis vel
+              nisl. Nam blandit maximus tristique.
+            </p>
+            <a href="./services2.html" class="btn">Read More</a>
+          </div>
+          <div class="service-card">
+            <img src="./files/in2.webp" alt="Reconstruction" />
+            <h3>Reconstruction Services</h3>
+            <p>
+              Sed sit amet sapien sit amet odio lobortis ullamcorper quis vel
+              nisl. Nam blandit maximus tristique.
+            </p>
+            <a href="./4042.html" class="btn">Read More</a>
+          </div>
+          <div class="service-card">
+            <img src="./files/in03.webp" alt="Architect" />
+            <h3>Architectural Design</h3>
+            <p>
+              Sed sit amet sapien sit amet odio lobortis ullamcorper quis vel
+              nisl. Nam blandit maximus tristique.
+            </p>
+            <a href="./4042.html" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: RECENT WORKS -->
+    <section class="recent-works">
+      <div class="section-header">
+        <h2>RECENT WORKS</h2>
+      </div>
+      <div class="filter-tabs">
+        <div class="filter-tab active">All</div>
+        <div class="filter-tab">Architecture</div>
+        <div class="filter-tab">Building</div>
+        <div class="filter-tab">Garden</div>
+        <div class="filter-tab">Interior</div>
+        <div class="filter-tab">Office</div>
+        <div class="filter-tab">Workspace</div>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="./files/in3.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Construction</span>
+            <h4>MODERN VILLA</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in4.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Architecture</span>
+            <h4>URBAN COMPLEX</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in5.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Interior</span>
+            <h4>LUXURY KITCHEN</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in6.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Building</span>
+            <h4>OFFICE TOWER</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in7.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Garden</span>
+            <h4>ZEN GARDEN</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in8.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Construction</span>
+            <h4>LUXURY BUILDINGS</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in9.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Interior</span>
+            <h4>STUDIO APARTMENT</h4>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <img src="./files/in01.webp" alt="Work" />
+          <div class="portfolio-overlay">
+            <span>Architecture</span>
+            <h4>GLASS FACADE</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>WHAT OTHER SAY ABOUT US</h2>
+          <p
+            style="
+              color: var(--text-gray);
+              max-width: 600px;
+              margin: 20px auto 0;
+              font-size: 14px;
+            "
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            sit amet iaculis elit. Nam semper ut arcu non placerat.
+          </p>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="bubble">
+              Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec
+              sodales quam id lorem lobortis, vitae interdum nisl vehicula.
+            </div>
+            <div class="user-info">
+              <img src="./files/100 (2).webp" alt="User" />
+              <div>
+                <h5 style="font-size: 15px">GEORGE SLOWS</h5>
+                <span style="font-size: 12px; color: var(--text-gray)"
+                  >Builder manager</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="bubble">
+              Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec
+              sodales quam id lorem lobortis, vitae interdum nisl vehicula.
+            </div>
+            <div class="user-info">
+              <img src="./files/100 (4).webp" alt="User" />
+              <div>
+                <h5 style="font-size: 15px">GEORGE SLOWS</h5>
+                <span style="font-size: 12px; color: var(--text-gray)"
+                  >Builder manager</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="bubble">
+              Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec
+              sodales quam id lorem lobortis, vitae interdum nisl vehicula.
+            </div>
+            <div class="user-info">
+              <img src="./files/100 (6).webp" alt="User" />
+              <div>
+                <h5 style="font-size: 15px">GEORGE SLOWS</h5>
+                <span style="font-size: 12px; color: var(--text-gray)"
+                  >Builder manager</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: WHY CHOOSE US -->
+    <section class="why-us">
+      <div class="why-container">
+        <div class="why-img">
+          <img src="./files/inc.webp" alt="Team" />
+        </div>
+        <div class="why-content">
+          <div class="section-header" style="text-align: left; padding: 0">
+            <h2 style="display: block">WHY CHOOSE US?</h2>
+          </div>
+          <div class="accordion">
+            <div class="accordion-item">
+              <div class="accordion-header">
+                Employees have many years of experience
+                <span>⌄</span>
+              </div>
+              <div class="accordion-content">
+                Our team consists of experts who have handled hundreds of
+                complex projects with precision and care.
+              </div>
+            </div>
+            <div class="accordion-item active">
+              <div class="accordion-header active">
+                Quality construction continues after the project
+                <span>⌄</span>
+              </div>
+              <div class="accordion-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a
+                metus pellentesque, scelerisque ex sed, volutpat nisl. Curabitur
+                tortor mi, eleifend ornare lobortis non.
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-header">
+                We use technology to do the job more quickly
+                <span>⌄</span>
+              </div>
+              <div class="accordion-content">
+                Implementing latest BIM software and on-site automation to
+                ensure timely delivery without compromising quality.
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-header">
+                Employees are continually trained on safety issues
+                <span>⌄</span>
+              </div>
+              <div class="accordion-content">
+                Safety is our top priority. Weekly workshops and strict site
+                protocols keep our workers and your property safe.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: APARTMENT PLAN -->
+    <section class="apartment-plan">
+      <div class="container">
+        <div class="section-header">
+          <h2
+            style="
+              font-family: &quot;Poppins&quot;;
+              font-weight: 700;
+              text-transform: none;
+              display: block;
+            "
+          >
+            Apartments Plan
+          </h2>
+        </div>
+        <div class="plan-tabs">
+          <div class="plan-tab">The Studio</div>
+          <div class="plan-tab active">Deluxe Portion</div>
+          <div class="plan-tab">Penthouse</div>
+          <div class="plan-tab">Top Garden</div>
+          <div class="plan-tab">Double Height</div>
+        </div>
+        <div class="plan-flex">
+          <div class="plan-info">
+            <h3>Deluxe Portion</h3>
+            <p>
+              Enimad minim veniam quis nostrud exercitation ullamco laboris.
+              Lorem ipsum dolor sit amet cons aetetur adipisicing elit sed
+              eiusmod tempor.
+            </p>
+            <ul class="plan-details">
+              <li><span>Total Area</span> <span>2800 Sq. Ft</span></li>
+              <li><span>Bedroom</span> <span>150 Sq. Ft</span></li>
+              <li><span>Bathroom</span> <span>45 Sq. Ft</span></li>
+              <li><span>Balcony/Pets</span> <span>Allowed</span></li>
+              <li><span>Lounge</span> <span>650 Sq. Ft</span></li>
+            </ul>
+          </div>
+          <div class="plan-image">
+            <img src="./files/in5.webp" alt="Floor Plan" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: LATEST NEWS FEEDS -->
+    <section class="news" style="background: var(--light-bg)">
+      <div class="container">
+        <div class="section-header">
+          <span
+            style="
+              background: #ffebe6;
+              color: #ff4d29;
+              padding: 5px 15px;
+              border-radius: 20px;
+              font-size: 11px;
+              font-weight: 600;
+            "
+            >News & Blogs</span
+          >
+          <h2
+            style="
+              font-family: &quot;Poppins&quot;;
+              font-weight: 700;
+              display: block;
+              margin-top: 15px;
+            "
+          >
+            Leatest News Feeds
+          </h2>
+        </div>
+        <div class="blog-grid">
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="./files/b1.webp" alt="Blog" />
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span>by: Admin</span>
+                <span>Decorate</span>
+              </div>
+              <h4>10 Brilliant Ways To Decorate Your Home</h4>
+              <div class="blog-footer">
+                <span>June 24, 2021</span>
+                <a href="./blog2.html" class="read-more-link">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="./files/inl1.webp" alt="Blog" />
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span>by: Admin</span>
+                <span>Interior</span>
+              </div>
+              <h4>The Most Inspiring Interior Design Of 2021</h4>
+              <div class="blog-footer">
+                <span>July 23, 2021</span>
+                <a href="./4042.html" class="read-more-link">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="./files/inl2.webp" alt="Blog" />
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span>by: Admin</span>
+                <span>Estate</span>
+              </div>
+              <h4>Recent Commercial Real Estate Transactions</h4>
+              <div class="blog-footer">
+                <span>May 22, 2021</span>
+                <a href="./4042.html" class="read-more-link">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: STATS COUNTER -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h2 class="counter" data-target="1240">0</h2>
+            <p>Project Completed</p>
+          </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="1750">0</h2>
+            <p>Happy Clients</p>
+          </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="984">0</h2>
+            <p>Workers Employed</p>
+          </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="96">0</h2>
+            <p>Awards Won</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <a href="#" class="back-to-top">TOP</a> -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <img
+              src="./assets/logo.webp"
+              alt="Company Logo"
+              class="footer-logo"
+            />
+            <p class="footer-description">
+              Excellence in construction and real estate services. We provide
+              high-quality residential and commercial solutions worldwide.
+            </p>
+            <div class="social-links">
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path
+                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                  ></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="./home2.html">Home</a></li>
+              <li><a href="./services2.html">Services</a></li>
+              <li><a href="./blog2.html">Insights</a></li>
+              <li><a href="./about2.html">About</a></li>
+              <li><a href="./contact2.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Contact Us</h4>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>18/A, New Born Town Hall<br />New York, US</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span>info@company.com</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path>
+              </svg>
+              <span>+0123-456789</span>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Newsletter</h4>
+            <p class="newsletter-desc">
+              Subscribe to receive latest updates and property news.
+            </p>
+            <form class="newsletter-form" action="./4042.html">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" class="btn-subscribe">SUBSCRIBE</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">© 2025 Company Name. All Rights Reserved.</p>
+          <div class="legal-links">
+            <a href="./4042.html">Privacy Policy</a>
+            <a href="./4042.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="./nav2.js"></script>
+    <script>
+      // --- HERO SLIDER ---
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".dot");
+
+      function setSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+        currentSlide = index;
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+      }
+
+      setInterval(() => {
+        let next = (currentSlide + 1) % slides.length;
+        setSlide(next);
+      }, 5000);
+
+      // --- ACCORDION ---
+      const accordionHeaders = document.querySelectorAll(".accordion-header");
+      accordionHeaders.forEach((header) => {
+        header.addEventListener("click", () => {
+          const item = header.parentElement;
+          document.querySelectorAll(".accordion-item").forEach((i) => {
+            if (i !== item) {
+              i.classList.remove("active");
+              i.querySelector(".accordion-header").classList.remove("active");
+            }
+          });
+          item.classList.toggle("active");
+          header.classList.toggle("active");
+        });
+      });
+
+      // --- STATS COUNTER ---
+      const counters = document.querySelectorAll(".counter");
+      const speed = 200;
+      const startCounters = () => {
+        counters.forEach((counter) => {
+          const updateCount = () => {
+            const target = +counter.getAttribute("data-target");
+            const count = +counter.innerText;
+            const inc = target / speed;
+            if (count < target) {
+              counter.innerText = Math.ceil(count + inc);
+              setTimeout(updateCount, 10);
+            } else {
+              counter.innerText = target + (target > 500 ? "+" : "");
+            }
+          };
+          updateCount();
+        });
+      };
+
+      let counted = false;
+      window.addEventListener("scroll", () => {
+        const statsSection = document.querySelector(".stats");
+        if (!statsSection) return;
+        const pos = statsSection.getBoundingClientRect().top;
+        const screenPos = window.innerHeight;
+        if (pos < screenPos && !counted) {
+          startCounters();
+          counted = true;
+        }
+      });
+
+      // --- TABS ---
+      const filterTabs = document.querySelectorAll(".filter-tab, .plan-tab");
+      filterTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tab.parentElement
+            .querySelectorAll(".active")
+            .forEach((a) => a.classList.remove("active"));
+          tab.classList.add("active");
+        });
+      });
+
+      // --- BACK TO TOP ---
+      document.querySelector(".back-to-top").addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

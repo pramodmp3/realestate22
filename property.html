@@ -1,0 +1,1338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Property Listings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./nav.css" />
+    <link rel="stylesheet" href="./footer.css" />
+
+    <script src="./nav.js"></script>
+    <style>
+      :root {
+        --primary-green: #0f4c3a;
+        --medium-green: #1e6f5c;
+        --accent-green: #b7d98a;
+        --light-bg: #f5f5f5;
+        --card-bg: #ffffff;
+        --text-dark: #1e1e1e;
+        --text-muted: #666666;
+        --orange-accent: #ff5a3c;
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
+        --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+        --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        font-family: "Inter", sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .section-wrapper {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 1024px) {
+        .section-wrapper {
+          padding: 100px 20px;
+        }
+      }
+      :root {
+        --primary-green: #0f4c3a;
+        --dark-green: #0b3a2e;
+        --medium-green: #1e6f5c;
+        --mint-green: #e6f2ec;
+        --accent-green: #b7d98a;
+        --navy-hero: #1b2a44;
+        --bg-light: #f5f5f5;
+        --text-dark: #1e1e1e;
+        --text-light: #ffffff;
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 20px 40px rgba(15, 76, 58, 0.15);
+        --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      /* --- MOBILE-FIRST HERO SECTION --- */
+      .hero {
+        position: relative;
+        width: 100%;
+        background-color: var(--navy-hero);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column; /* Stacked by default for mobile */
+      }
+
+      .hero-left {
+        padding: 60px 24px;
+        color: var(--text-light);
+        z-index: 2;
+        text-align: left;
+      }
+
+      .hero-title {
+        font-size: 36px; /* Smaller for mobile */
+        margin-bottom: 12px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s forwards 0.2s;
+      }
+
+      .breadcrumb {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        animation: fadeIn 0.8s forwards 0.6s;
+      }
+
+      .hero-right {
+        position: relative;
+        height: 250px; /* Reduced for mobile */
+        width: 100%;
+      }
+
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        animation: imageScale 1.2s forwards;
+      }
+
+      /* Desktop Adjustments for Hero */
+      @media (min-width: 1024px) {
+        .hero {
+          height: 420px;
+          flex-direction: row;
+        }
+
+        .hero-left {
+          width: 58%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-left: 120px;
+        }
+
+        .hero-title {
+          font-size: 64px;
+        }
+
+        .hero-right {
+          width: 42%;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .hero::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 39%;
+          width: 60px;
+          height: 100%;
+          background-color: var(--accent-green);
+          transform: skewX(-15deg);
+          z-index: 1;
+          opacity: 0;
+          animation: fadeIn 0.8s forwards 0.8s;
+        }
+      }
+      /* Keyframes */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes imageScale {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* Grid Layout */
+      .property-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 768px) {
+        .property-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 25px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .property-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+      }
+
+      /* Property Card */
+      .property-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .property-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      /* Image Section */
+      .card-image-box {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+      }
+
+      .card-image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .property-card:hover .card-image-box img {
+        transform: scale(1.05);
+      }
+
+      .price-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--accent-green);
+        color: var(--primary-green);
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-family: "Poppins", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+
+      /* Content Area */
+      .card-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .location-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--orange-accent);
+        font-size: 13px;
+      }
+
+      .location-row span {
+        color: var(--text-muted);
+        font-weight: 400;
+      }
+
+      .property-title {
+        font-size: 19px;
+        font-weight: 700;
+        color: #1a2b48;
+        transition: color 0.3s ease;
+      }
+
+      .property-card:hover .property-title {
+        color: var(--orange-accent);
+      }
+
+      .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+        margin-bottom: 5px;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      .meta-item svg {
+        width: 16px;
+        height: 16px;
+        opacity: 0.7;
+      }
+
+      /* View Details */
+      .view-details {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--orange-accent);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        width: fit-content;
+        position: relative;
+      }
+
+      .view-details::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background-color: var(--orange-accent);
+        transition: width 0.3s ease;
+      }
+
+      .property-card:hover .view-details::after {
+        width: 100%;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 50px;
+      }
+
+      .page-btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #e9ecef;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .page-btn.active {
+        background: var(--orange-accent);
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(255, 90, 60, 0.3);
+      }
+
+      .page-btn:hover:not(.active) {
+        background: #dee2e6;
+        color: var(--text-dark);
+      }
+
+      .page-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Icon Styles */
+      .icon-orange {
+        fill: var(--orange-accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="stknav-header">
+      <div class="stknav-container">
+        <!-- Logo -->
+        <a href="./index.html" class="stknav-logo">
+          <img
+            src="./assets/logo.webp"
+            alt="BrandLogo"
+            class="stknav-logo-img"
+          />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav>
+          <ul class="stknav-menu">
+            <li class="stknav-item">
+              <a href="./index.html" class="stknav-link"
+                >HOME
+                <span
+                  class="stknav-arrow"
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-width: 1.5px;
+                    margin-left: 2px;
+                  "
+                ></span
+              ></a>
+              <ul class="stknav-dropdown">
+                <li>
+                  <a href="./index.html" class="stknav-dropdown-link">HOME 1</a>
+                </li>
+                <li>
+                  <a href="./home2.html" class="stknav-dropdown-link">HOME 2</a>
+                </li>
+              </ul>
+            </li>
+            <li class="stknav-item">
+              <a href="./property.html" class="stknav-link">PROPERTY</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./about.html" class="stknav-link">ABOUT US</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./blog.html" class="stknav-link">BLOG</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./dashboard.html" class="stknav-link">DASHBOARD</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./contact.html" class="stknav-link">CONTACT</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Auth Desktop -->
+        <div class="stknav-auth">
+          <a href="./login.html" class="stknav-login-btn">LOGIN</a>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div
+          class="stknav-hamburger"
+          id="stknav-hamburger"
+          aria-label="Toggle Navigation"
+          aria-expanded="false"
+        >
+          <span class="stknav-bar stknav-bar-1"></span>
+          <span class="stknav-bar stknav-bar-2"></span>
+          <span class="stknav-bar stknav-bar-3"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="stknav-overlay" id="stknav-overlay">
+      <button class="stknav-close-btn" id="stknav-close">✕</button>
+      <ul class="stknav-mobile-list">
+        <li class="stknav-mobile-item">
+          <a
+            href="javascript:void(0)"
+            class="stknav-mobile-link stknav-toggle-sub"
+          >
+            HOME <span class="stknav-arrow"></span>
+          </a>
+          <div class="stknav-mobile-dropdown">
+            <a href="./index.html" class="stknav-mobile-sublink">HOME 1</a>
+            <a href="./home2.html" class="stknav-mobile-sublink">HOME 2</a>
+          </div>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./property.html" class="stknav-mobile-link">PROPERTY</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./about.html" class="stknav-mobile-link">ABOUT US</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./blog.html" class="stknav-mobile-link">BLOG</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./dashboard.html" class="stknav-mobile-link">DASHBOARD</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./contact.html" class="stknav-mobile-link">CONTACT</a>
+        </li>
+      </ul>
+
+      <div class="stknav-mobile-auth">
+        <a href="./login.html" class="stknav-mobile-login">LOGIN</a>
+      </div>
+    </div>
+    <header class="hero">
+      <div class="hero-left">
+        <h1 class="hero-title" style="color: #ffffff">PROPERTIES</h1>
+        <div class="breadcrumb">
+          Home
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+          <span>Properties</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img
+          class="hero-img"
+          src="./assets/hero1.webp"
+          alt="Luxury Real Estate"
+        />
+      </div>
+    </header>
+    <section class="section-wrapper">
+      <div class="property-grid">
+        <!-- Card 1 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/prop1.webp" alt="House with Private Parking" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Houses With Private Parking</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/prop2.webp" alt="Furnished Homes" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Furnished Homes</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/prop3.webp" alt="Single-Family Homes" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Single-Family Homes</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/prop4.webp" alt="City Center Homes" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">City Center Homes</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/prop5.webp" alt="Mid-Range Houses" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Mid-Range Houses</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/about1.webp" alt="Houses with Private Parking" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Houses With Private Parking</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 7 (New) -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/h1.webp" alt="Luxury Modern Villa" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Luxury Modern Villa</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 8 (New) -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/h2.webp" alt="Penthouse Suite" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Penthouse Suite</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 9 (New) -->
+        <article class="property-card">
+          <div class="card-image-box">
+            <span class="price-badge">Price $269</span>
+            <img src="./assets/hero2.webp" alt="Suburban Family Retreat" />
+          </div>
+          <div class="card-content">
+            <div class="location-row">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                />
+              </svg>
+              <span>18 Brooklyn Street, New York</span>
+            </div>
+            <h3 class="property-title">Suburban Family Retreat</h3>
+            <div class="meta-row">
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"
+                  />
+                </svg>
+                1860 sqft
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm13-3h-8v7H4V7c0-1.1-.9-2-2-2s-2 .9-2 2v10h1.29l.71 2h1.92l.71-2h10.75l.71 2h1.92l.71-2H22v-6c0-2.76-2.24-5-5-5z"
+                  />
+                </svg>
+                Bed 6
+              </div>
+              <div class="meta-item">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M7 7c0-1.1.9-2 2-2s2 .9 2 2v1H7V7zm10 4v-1c0-1.1-.9-2-2-2s-2 .9-2 2v1H2v2h1v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h1v-2h-5z"
+                  />
+                </svg>
+                Bath 2
+              </div>
+            </div>
+            <a href="./404.html" class="view-details">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+              View Details
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <a href="./404.html" class="page-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </a>
+        <a href="./404.html" class="page-btn active">01</a>
+        <a href="./404.html" class="page-btn">02</a>
+        <a href="./404.html" class="page-btn">03</a>
+        <a href="./404.html" class="page-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </section>
+    <!-- Top CTA Bar -->
+    <div class="stkq-cta-wrapper">
+      <div class="stkq-cta-bar">
+        <div class="stkq-cta-content">
+          <h2>Looking for a dream home?</h2>
+          <p>We can help you realize your dream of a new home</p>
+        </div>
+        <a href="./property.html" class="stkq-cta-btn">
+          Explore Properties
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="stkq-footer-container">
+      <div class="stkq-footer-grid">
+        <!-- Col 1: Logo & Contact -->
+        <div class="stkq-footer-col">
+          <a href="./index.html">
+            <img
+              src="./assets/logo.webp"
+              alt="Quarter Logo"
+              class="stkq-logo-placeholder"
+          /></a>
+          <p class="stkq-description">
+            Lorem Ipsum is simply dummy text of the and typesetting industry.
+            Lorem Ipsum is dummy text of the printing.
+          </p>
+          <ul class="stkq-contact-info">
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Brooklyn, New York, United States</span>
+            </li>
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+              <span>+0123-456789</span>
+            </li>
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>example@example.com</span>
+            </li>
+          </ul>
+          <div class="stkq-social-row">
+            <a href="./404.html" class="stkq-social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="./404.html" class="stkq-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="./404.html" class="stkq-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"
+                ></path>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="./404.html"
+              class="stkq-social-icon"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Company -->
+        <div class="stkq-footer-col">
+          <h4>Company</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./blog.html">Blog</a></li>
+            <li><a href="./property.html">Properties</a></li>
+            <li><a href="./404.html">Locations Map</a></li>
+            <li><a href="./404.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="stkq-footer-col">
+          <h4>Services</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./404.html">Order tracking</a></li>
+            <li><a href="./404.html">Wish List</a></li>
+            <li><a href="./login.html">Login</a></li>
+            <li><a href="./404.html">My account</a></li>
+            <li><a href="./404.html">Terms & Conditions</a></li>
+            <li><a href="./404.html">Promotional Offers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Customer Care -->
+        <div class="stkq-footer-col">
+          <h4>Customer Care</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./login.html">Login</a></li>
+            <li><a href="./404.html">My account</a></li>
+            <li><a href="./404.html">Wish List</a></li>
+            <li><a href="./404.html">Order tracking</a></li>
+            <li><a href="./404.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Newsletter -->
+        <div class="stkq-footer-col">
+          <h4>Newsletter</h4>
+          <p class="stkq-newsletter-text">
+            Subscribe to our weekly Newsletter and receive updates via email.
+          </p>
+          <form class="stkq-newsletter-form" action="./404.html">
+            <input
+              type="email"
+              class="stkq-newsletter-input"
+              placeholder="Email*"
+              required
+            />
+            <button
+              type="submit"
+              class="stkq-newsletter-submit"
+              aria-label="Subscribe"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+          <div class="stkq-payment-methods">
+            <span class="stkq-payment-label">We Accept</span>
+            <div class="stkq-payment-img-container">
+              <!-- Placeholder for payment icons -->
+              <span style="font-size: 10px; opacity: 0.5">PAYMENTS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bottom Copyright Bar -->
+    <div class="stkq-bottom-bar">
+      <div class="stkq-bottom-inner">
+        <p>&copy; All Rights Reserved @ Company 2026</p>
+        <div class="stkq-legal-links">
+          <a href="./404.html">Terms & Conditions</a>
+          <a href="./404.html">Claim</a>
+          <a href="./404.html">Privacy & Policy</a>
+        </div>
+      </div>
+      <!-- Scroll to top button -->
+      <div
+        class="stkq-scroll-top"
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        title="Go to top"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>

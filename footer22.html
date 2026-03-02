@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Real Estate Footer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --yellow: #ff4929;
+        --dark: #1a1a1a;
+        --text-gray: #b0b0b0; /* Adjusted for readability on dark background */
+        --light-bg: #f9f9f9;
+        --white: #ffffff;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--light-bg);
+      }
+
+      .footer {
+        background-color: var(--dark);
+        color: var(--white);
+        padding: 50px 0 20px;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .footer-description {
+        color: var(--text-gray);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        max-width: 400px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 12px;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--white);
+        transition: var(--transition);
+        border: 1px solid var(--border);
+      }
+
+      .social-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+
+      .social-icon:hover {
+        background: var(--yellow);
+        color: var(--white);
+        border-color: var(--yellow);
+        transform: translateY(-5px);
+      }
+
+      .footer-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--white);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 14px;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+        color: var(--text-gray);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: var(--transition);
+        position: relative;
+        display: inline-block;
+      }
+
+      .footer-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--yellow);
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--white);
+      }
+
+      .footer-links a:hover::after {
+        width: 100%;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 22px;
+        color: var(--text-gray);
+        font-size: 0.95rem;
+      }
+
+      .contact-item svg {
+        width: 20px;
+        height: 20px;
+        color: var(--yellow);
+        flex-shrink: 0;
+      }
+
+      .newsletter-desc {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .newsletter-form input {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        padding: 16px 20px;
+        border-radius: 4px;
+        color: var(--white);
+        outline: none;
+        font-family: inherit;
+        transition: var(--transition);
+        margin-bottom: 10px;
+      }
+
+      .newsletter-form input:focus {
+        border-color: var(--yellow);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .btn-subscribe {
+        background: transparent;
+        border: 1px solid var(--yellow);
+        color: var(--yellow);
+        padding: 16px 25px;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: var(--transition);
+      }
+
+      .btn-subscribe::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--yellow);
+        transition: var(--transition);
+        z-index: -1;
+      }
+
+      .btn-subscribe:hover {
+        color: var(--white);
+      }
+
+      .btn-subscribe:hover::before {
+        left: 0;
+      }
+
+      .footer-bottom {
+        margin-top: 60px;
+        padding-top: 30px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .copyright {
+        color: var(--text-gray);
+        font-size: 0.85rem;
+      }
+
+      .legal-links {
+        display: flex;
+        gap: 25px;
+      }
+
+      .legal-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: var(--transition);
+      }
+
+      .legal-links a:hover {
+        color: var(--yellow);
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-bottom {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .footer {
+          padding: 80px 0 40px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1.4fr 0.7fr 1fr 1.2fr;
+        }
+
+        .footer-logo {
+          width: 120px;
+        }
+
+        .newsletter-form {
+          flex-direction: row;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 4px;
+          padding: 5px;
+          border: 1px solid var(--border);
+        }
+
+        .newsletter-form input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          margin-bottom: 0;
+        }
+
+        .newsletter-form input:focus {
+          background: transparent;
+        }
+
+        .btn-subscribe {
+          padding: 12px 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <img
+              src="./assets/logo.webp"
+              alt="Company Logo"
+              class="footer-logo"
+            />
+            <p class="footer-description">
+              Excellence in construction and real estate services. We provide
+              high-quality residential and commercial solutions worldwide.
+            </p>
+            <div class="social-links">
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path
+                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                  ></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="./4042.html" class="social-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="./home2.html">Home</a></li>
+              <li><a href="./services2.html">Services</a></li>
+              <li><a href="./blog2.html">Insights</a></li>
+              <li><a href="./about2.html">About</a></li>
+              <li><a href="./contact2.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Contact Us</h4>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>18/A, New Born Town Hall<br />New York, US</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span>info@company.com</span>
+            </div>
+            <div class="contact-item">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path>
+              </svg>
+              <span>+0123-456789</span>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-title">Newsletter</h4>
+            <p class="newsletter-desc">
+              Subscribe to receive latest updates and property news.
+            </p>
+            <form class="newsletter-form" action="./4042.html">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit" class="btn-subscribe">SUBSCRIBE</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">© 2025 Company Name. All Rights Reserved.</p>
+          <div class="legal-links">
+            <a href="./4042.html">Privacy Policy</a>
+            <a href="./4042.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

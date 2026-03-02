@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY | Create Account</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f7f3ed; /* Soft cream background */
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+        padding: 15px;
+        opacity: 0; /* Initial state for GSAP fade-in */
+      }
+      /* Background Image */
+      .bg-image {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+        filter: blur(4px); /* Blur effect */
+        transform: scale(1.1); /* Prevent blur edges */
+        opacity: 0.9; /* Control image opacity */
+      }
+
+      /* Optional Dark Overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 57, 49, 0.45); /* Dark green overlay */
+        z-index: -1;
+      }
+      /* Main Card Container - Height adjusted to 580px to match Login */
+      .card {
+        width: 900px;
+        height: 580px;
+        background: #ffffff;
+        border-radius: 25px;
+        border: 4px solid #063931; /* Thick dark green border */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        max-width: 100%;
+        visibility: hidden; /* Prevent FOUC */
+      }
+
+      /* LEFT SECTION */
+      .left-section {
+        width: 50%;
+        padding: 35px 60px; /* Reduced vertical padding */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #ffffff;
+        z-index: 2;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        /* cursor: pointer; */
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 18px;
+        background: linear-gradient(to right, #20b2aa, #063931);
+        clip-path: polygon(
+          0% 20%,
+          100% 20%,
+          100% 40%,
+          0% 40%,
+          0% 60%,
+          100% 60%,
+          100% 80%,
+          0% 80%
+        );
+      }
+
+      .logo-text {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a0b3b;
+      }
+
+      .header h1 {
+        font-size: 26px; /* Slightly smaller header */
+        color: #1a0b3b;
+        margin-bottom: 4px;
+        font-weight: 700;
+      }
+
+      .header p {
+        color: #7a7a7a;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+
+      /* Form Controls - Compact layout for extra fields */
+      .form-group {
+        margin-bottom: 10px;
+        position: relative;
+      }
+
+      .form-group label {
+        position: absolute;
+        top: 7px;
+        left: 15px;
+        font-size: 9px;
+        color: #b0b0b0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .input-field {
+        width: 100%;
+        padding: 22px 45px 8px 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 13px;
+        color: #1a0b3b;
+        outline: none;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+        -webkit-appearance: none;
+      }
+
+      .input-field:focus {
+        border-color: #063931;
+        box-shadow: 0 0 0 3px rgba(6, 57, 49, 0.05);
+      }
+
+      /* Password Toggle Styling */
+      .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 55%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #b0b0b0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+      }
+
+      .toggle-password svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Buttons */
+      .buttons-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s ease;
+        flex: 1;
+        border: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-signup {
+        background-color: #1b5e54;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(27, 94, 84, 0.2);
+      }
+
+      .btn-login {
+        background-color: transparent;
+        color: #1b5e54;
+        border: 1px solid #1b5e54;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-text {
+        font-size: 10px;
+        color: #b0b0b0;
+        line-height: 1.4;
+        max-width: 280px;
+      }
+
+      /* RIGHT SECTION */
+      .right-section {
+        width: 50%;
+        position: relative;
+        background-color: #063931;
+        display: flex;
+        overflow: hidden;
+      }
+
+      .right-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1.1);
+      }
+
+      .overlay-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .shape {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        width: 100px;
+        height: 350px;
+      }
+
+      .shape-1 {
+        left: 8%;
+        top: 15%;
+        transform: rotate(-12deg);
+      }
+      .shape-2 {
+        right: 12%;
+        bottom: 10%;
+        transform: rotate(15deg);
+      }
+
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 48px;
+        background-color: #ffc107;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .play-icon {
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 11px solid #ffffff;
+        margin-left: 3px;
+      }
+
+      #message-box {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translate(-50%, -200%);
+        padding: 12px 20px;
+        border-radius: 8px;
+        background: #1b5e54;
+        color: white;
+        font-size: 13px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 100;
+      }
+
+      #message-box.show {
+        transform: translate(-50%, 0);
+      }
+
+      .indicators {
+        position: absolute;
+        bottom: 25px;
+        right: 25px;
+        display: flex;
+        gap: 8px;
+      }
+
+      .indicator {
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+      }
+
+      .indicator.active {
+        background: #fff;
+        color: #063931;
+      }
+
+      /* --- RESPONSIVENESS --- */
+      @media (max-width: 820px) {
+        body {
+          align-items: flex-start;
+        }
+        .card {
+          flex-direction: column;
+          height: auto;
+          width: 100%;
+          max-width: 480px;
+          border-radius: 20px;
+          margin: 20px auto;
+        }
+        .left-section,
+        .right-section {
+          width: 100%;
+        }
+        .left-section {
+          padding: 30px 25px;
+          order: 2;
+        }
+        .right-section {
+          height: 260px;
+          order: 1;
+        }
+        .play-button {
+          left: 50%;
+          top: 100%;
+        }
+        .buttons-row {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .footer-text {
+          margin-top: 20px;
+          max-width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message-box">Account created successfully!</div>
+    <img src="./assets/about1.webp" class="bg-image" />
+    <div class="card" id="mainCard">
+      <!-- <div
+        class="play-button"
+        id="playBtn"
+        onclick="showMessage('Tutorial video starting...')"
+      >
+        <div class="play-icon"></div>
+      </div> -->
+
+      <div class="left-section">
+        <div id="formContainer">
+          <div class="logo animate-item">
+            <div class="logo-icon"></div>
+            <span class="logo-text">STACKLY</span>
+          </div>
+
+          <div class="header animate-item">
+            <h1>Join Us!</h1>
+            <p>Start your journey with Stackly.</p>
+          </div>
+
+          <form id="signupForm">
+            <div class="form-group animate-item">
+              <label for="fullname">Full Name</label>
+              <input
+                type="text"
+                id="fullname"
+                class="input-field"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
+            <div class="form-group animate-item">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                class="input-field"
+                placeholder="hello@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group animate-item">
+              <label for="password">Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  class="input-field"
+                  placeholder="••••••••"
+                  required
+                />
+                <!-- <span class="toggle-password" id="togglePassword">
+                  <svg
+                    id="eyeIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                </span> -->
+              </div>
+            </div>
+
+            <div class="form-group animate-item">
+              <label for="confirm-password">Confirm Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="confirm-password"
+                  class="input-field"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="buttons-row animate-item">
+              <button type="submit" class="btn btn-signup">Sign Up</button>
+              <button
+                type="button"
+                class="btn btn-login"
+                onclick="window.location.href = './login.html'"
+              >
+                Log In
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="footer-text animate-item" id="footerText">
+          By signing up you agree to our terms and data privacy policy.
+        </div>
+      </div>
+
+      <div class="right-section" id="imageSection">
+        <img src="./assets/sign.webp" id="mainImg" alt="Signup Visual" />
+
+        <!-- <div class="overlay-shapes">
+          <div class="shape shape-1" id="shape1"></div>
+          <div class="shape shape-2" id="shape2"></div>
+        </div> -->
+
+        <!-- <div class="indicators" id="indicators">
+          <span class="indicator active">1</span>
+          <span class="indicator">2</span>
+        </div> -->
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        gsap.set("#mainCard", { visibility: "visible" });
+        gsap.set("body", { opacity: 1 });
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.from("#mainCard", {
+          duration: 1.2,
+          y: 60,
+          opacity: 0,
+          scale: 0.95,
+          ease: "expo.out",
+        });
+        tl.from(
+          ".animate-item",
+          {
+            duration: 0.8,
+            y: 20,
+            opacity: 0,
+            stagger: 0.08,
+            clearProps: "all",
+          },
+          "-=0.6",
+        );
+        tl.from("#imageSection", { duration: 1, x: 100, opacity: 0 }, "-=1");
+        tl.to(
+          "#mainImg",
+          { duration: 4, scale: 1, ease: "power1.inOut" },
+          "-=1",
+        );
+        tl.from(
+          "#playBtn",
+          { duration: 0.8, scale: 0, ease: "back.out(1.7)" },
+          "-=0.5",
+        );
+
+        gsap.to("#shape1", {
+          y: 20,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+        gsap.to("#shape2", {
+          y: -20,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.5,
+        });
+      });
+
+      function showMessage(text) {
+        const msgBox = document.getElementById("message-box");
+        msgBox.innerText = text;
+        msgBox.classList.add("show");
+        gsap.fromTo(
+          msgBox,
+          { scale: 0.8 },
+          { scale: 1, duration: 0.3, ease: "back.out(2)" },
+        );
+        setTimeout(() => {
+          msgBox.classList.remove("show");
+        }, 3000);
+      }
+
+      const togglePassword = document.querySelector("#togglePassword");
+      const passwordInput = document.querySelector("#password");
+      const eyeIcon = document.querySelector("#eyeIcon");
+
+      togglePassword.addEventListener("click", function () {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        gsap.fromTo(
+          eyeIcon,
+          { scale: 0.5, rotate: -45 },
+          { scale: 1, rotate: 0, duration: 0.3 },
+        );
+
+        if (type === "text") {
+          eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />`;
+        } else {
+          eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
+        }
+      });
+
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const pw = document.getElementById("password").value;
+          const confirmPw = document.getElementById("confirm-password").value;
+
+          if (pw !== confirmPw) {
+            showMessage("Passwords do not match!");
+            return;
+          }
+
+          const signupBtn = this.querySelector(".btn-signup");
+          signupBtn.innerText = "Success!";
+          signupBtn.disabled = true;
+          gsap.to(signupBtn, {
+            scale: 0.98,
+            repeat: 3,
+            yoyo: true,
+            duration: 0.3,
+          });
+          showMessage("Welcome to Kafh!");
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Insights | Premium Property Trends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./nav.css" />
+    <link rel="stylesheet" href="./footer.css" />
+    <script src="./nav.js"></script>
+    <style>
+      :root {
+        --primary-green: #0f4c3a;
+        --dark-green: #0b3a2e;
+        --medium-green: #1e6f5c;
+        --mint-green: #e6f2ec;
+        --accent-green: #b7d98a;
+        --navy-hero: #1b2a44;
+        --bg-light: #f5f5f5;
+        --text-dark: #1e1e1e;
+        --text-muted: #666666;
+        --text-light: #ffffff;
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 20px 40px rgba(15, 76, 58, 0.15);
+        --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --max-width: 1280px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* --- Animations --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .reveal {
+        animation: fadeInUp 0.8s var(--transition) both;
+      }
+      :root {
+        --primary-green: #0f4c3a;
+        --dark-green: #0b3a2e;
+        --medium-green: #1e6f5c;
+        --mint-green: #e6f2ec;
+        --accent-green: #b7d98a;
+        --navy-hero: #1b2a44;
+        --bg-light: #f5f5f5;
+        --text-dark: #1e1e1e;
+        --text-light: #ffffff;
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 20px 40px rgba(15, 76, 58, 0.15);
+        --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      /* --- MOBILE-FIRST HERO SECTION --- */
+      .hero {
+        position: relative;
+        width: 100%;
+        background-color: var(--navy-hero);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column; /* Stacked by default for mobile */
+      }
+
+      .hero-left {
+        padding: 60px 24px;
+        color: var(--text-light);
+        z-index: 2;
+        text-align: left;
+      }
+
+      .hero-title {
+        font-size: 36px; /* Smaller for mobile */
+        margin-bottom: 12px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s forwards 0.2s;
+      }
+
+      .breadcrumb {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        animation: fadeIn 0.8s forwards 0.6s;
+      }
+
+      .hero-right {
+        position: relative;
+        height: 250px; /* Reduced for mobile */
+        width: 100%;
+      }
+
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+        animation: imageScale 1.2s forwards;
+      }
+
+      /* Desktop Adjustments for Hero */
+      @media (min-width: 1024px) {
+        .hero {
+          height: 420px;
+          flex-direction: row;
+        }
+
+        .hero-left {
+          width: 58%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-left: 120px;
+        }
+
+        .hero-title {
+          font-size: 64px;
+        }
+
+        .hero-right {
+          width: 42%;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .hero::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 39%;
+          width: 60px;
+          height: 100%;
+          background-color: var(--accent-green);
+          transform: skewX(-15deg);
+          z-index: 1;
+          opacity: 0;
+          animation: fadeIn 0.8s forwards 0.8s;
+        }
+      }
+      /* Keyframes */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes imageScale {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* --- Main Layout --- */
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 80px 20px;
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 40px;
+      }
+
+      /* --- Blog Grid --- */
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .blog-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .card-image-wrap {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+      }
+
+      .card-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .blog-card:hover .card-image-wrap img {
+        transform: scale(1.1);
+      }
+
+      .category-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--accent-green);
+        color: var(--dark-green);
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 2;
+      }
+
+      .card-content {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .meta-row {
+        display: flex;
+        gap: 15px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+
+      .blog-card h3 {
+        color: var(--primary-green);
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        transition: var(--transition);
+      }
+
+      .blog-card:hover h3 {
+        color: var(--dark-green);
+      }
+
+      .card-description {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .read-more-btn {
+        margin-top: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-green);
+        color: white;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: var(--transition);
+      }
+
+      .read-more-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--dark-green);
+        transition: var(--transition);
+        z-index: -1;
+      }
+
+      .read-more-btn:hover::before {
+        left: 0;
+      }
+
+      /* --- Sidebar --- */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .sidebar-widget {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .widget-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--mint-green);
+        position: relative;
+      }
+
+      .widget-title::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--primary-green);
+      }
+
+      /* Search Box */
+      .search-box {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .search-box:focus-within {
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 3px var(--mint-green);
+      }
+
+      .search-box input {
+        border: none;
+        padding: 12px 15px;
+        width: 100%;
+        outline: none;
+        font-family: inherit;
+      }
+
+      .search-btn {
+        background: var(--primary-green);
+        border: none;
+        color: white;
+        padding: 0 20px;
+        cursor: pointer;
+      }
+
+      /* Categories List */
+      .category-list {
+        list-style: none;
+      }
+
+      .category-list li a {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--bg-light);
+        font-weight: 500;
+      }
+
+      .category-list li a:hover {
+        color: var(--medium-green);
+        padding-left: 10px;
+        border-left: 3px solid var(--primary-green);
+      }
+
+      /* Tags */
+      .tags-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag {
+        background: var(--mint-green);
+        color: var(--dark-green);
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .tag:hover {
+        background: var(--primary-green);
+        color: white;
+      }
+
+      /* Featured Property */
+      .featured-prop {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .featured-prop img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .prop-info h4 {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+      }
+
+      .prop-info span {
+        color: var(--medium-green);
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      /* --- Responsiveness --- */
+      @media (max-width: 1024px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 40px 15px;
+        }
+        .hero h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="stknav-header">
+      <div class="stknav-container">
+        <!-- Logo -->
+        <a href="./index.html" class="stknav-logo">
+          <img
+            src="./assets/logo.webp"
+            alt="BrandLogo"
+            class="stknav-logo-img"
+          />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav>
+          <ul class="stknav-menu">
+            <li class="stknav-item">
+              <a href="./index.html" class="stknav-link"
+                >HOME
+                <span
+                  class="stknav-arrow"
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-width: 1.5px;
+                    margin-left: 2px;
+                  "
+                ></span
+              ></a>
+              <ul class="stknav-dropdown">
+                <li>
+                  <a href="./index.html" class="stknav-dropdown-link">HOME 1</a>
+                </li>
+                <li>
+                  <a href="./home2.html" class="stknav-dropdown-link">HOME 2</a>
+                </li>
+              </ul>
+            </li>
+            <li class="stknav-item">
+              <a href="./property.html" class="stknav-link">PROPERTY</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./about.html" class="stknav-link">ABOUT US</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./blog.html" class="stknav-link">BLOG</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./dashboard.html" class="stknav-link">DASHBOARD</a>
+            </li>
+            <li class="stknav-item">
+              <a href="./contact.html" class="stknav-link">CONTACT</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Auth Desktop -->
+        <div class="stknav-auth">
+          <a href="./login.html" class="stknav-login-btn">LOGIN</a>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div
+          class="stknav-hamburger"
+          id="stknav-hamburger"
+          aria-label="Toggle Navigation"
+          aria-expanded="false"
+        >
+          <span class="stknav-bar stknav-bar-1"></span>
+          <span class="stknav-bar stknav-bar-2"></span>
+          <span class="stknav-bar stknav-bar-3"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="stknav-overlay" id="stknav-overlay">
+      <button class="stknav-close-btn" id="stknav-close">✕</button>
+      <ul class="stknav-mobile-list">
+        <li class="stknav-mobile-item">
+          <a
+            href="javascript:void(0)"
+            class="stknav-mobile-link stknav-toggle-sub"
+          >
+            HOME <span class="stknav-arrow"></span>
+          </a>
+          <div class="stknav-mobile-dropdown">
+            <a href="./index.html" class="stknav-mobile-sublink">HOME 1</a>
+            <a href="./home2.html" class="stknav-mobile-sublink">HOME 2</a>
+          </div>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./property.html" class="stknav-mobile-link">PROPERTY</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./about.html" class="stknav-mobile-link">ABOUT US</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./blog.html" class="stknav-mobile-link">BLOG</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./dashboard.html" class="stknav-mobile-link">DASHBOARD</a>
+        </li>
+        <li class="stknav-mobile-item">
+          <a href="./contact.html" class="stknav-mobile-link">CONTACT</a>
+        </li>
+      </ul>
+
+      <div class="stknav-mobile-auth">
+        <a href="./login.html" class="stknav-mobile-login">LOGIN</a>
+      </div>
+    </div>
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-left">
+        <h1 class="hero-title" style="color: #ffffff">INSIGHTS</h1>
+        <div class="breadcrumb">
+          Home
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+          <span>Blogs</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img
+          class="hero-img"
+          src="./assets/hero1.webp"
+          alt="Luxury Real Estate"
+        />
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Blog Grid -->
+      <section class="blog-grid">
+        <!-- Card 1 -->
+        <article class="blog-card reveal">
+          <div class="card-image-wrap">
+            <span class="category-badge">Investment</span>
+            <img src="./assets/h1.webp" alt="Modern Building" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>May 12, 2024</span>
+              <span>• By Alex Rivera</span>
+            </div>
+            <h3>Top 10 Real Estate Investment Strategies in 2026</h3>
+            <p class="card-description">
+              Discover the evolving landscape of property investment. From green
+              infrastructure to tech-driven valuation, learn where the smart
+              money is moving next.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="blog-card reveal" style="animation-delay: 0.1s">
+          <div class="card-image-wrap">
+            <span class="category-badge">Luxury Homes</span>
+            <img src="./assets/h2.webp" alt="Luxury Villa" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>May 10, 2024</span>
+              <span>• By Sarah Chen</span>
+            </div>
+            <h3>Luxury Living: What Defines Premium Property?</h3>
+            <p class="card-description">
+              Beyond high ceilings and marble floors, explore the intangible
+              elements that define the modern ultra-luxury residential
+              experience.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="blog-card reveal" style="animation-delay: 0.2s">
+          <div class="card-image-wrap">
+            <span class="category-badge">Buying Guide</span>
+            <img src="./assets/hero2.webp" alt="Family Home" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>May 08, 2024</span>
+              <span>• By Julian Vance</span>
+            </div>
+            <h3>How to Choose the Perfect Family Home</h3>
+            <p class="card-description">
+              A comprehensive guide for growing families. Learn how to evaluate
+              school districts, neighborhood safety, and long-term space
+              utility.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="blog-card reveal" style="animation-delay: 0.3s">
+          <div class="card-image-wrap">
+            <span class="category-badge">Market Trends</span>
+            <img src="./assets/about1.webp" alt="Skyline" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>May 05, 2024</span>
+              <span>• By Market Watch</span>
+            </div>
+            <h3>Is Now the Right Time to Buy? Market Forecast</h3>
+            <p class="card-description">
+              Analyzing interest rates, supply chain impacts on construction,
+              and seasonal trends to determine the optimal entry point for
+              buyers.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="blog-card reveal" style="animation-delay: 0.4s">
+          <div class="card-image-wrap">
+            <span class="category-badge">Property Tips</span>
+            <img src="./assets/about2.webp" alt="Kitchen Reno" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>May 02, 2024</span>
+              <span>• By Elena Moss</span>
+            </div>
+            <h3>Renovations That Yield the Highest ROI</h3>
+            <p class="card-description">
+              Not all upgrades are equal. We break down the top five home
+              renovations that actually increase your property's market value.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="blog-card reveal" style="animation-delay: 0.5s">
+          <div class="card-image-wrap">
+            <span class="category-badge">Rental Income</span>
+            <img src="./assets/home11.webp" alt="Apartment Interior" />
+          </div>
+          <div class="card-content">
+            <div class="meta-row">
+              <span>April 28, 2024</span>
+              <span>• By Marcus Thorne</span>
+            </div>
+            <h3>Navigating the Short-Term Rental Market</h3>
+            <p class="card-description">
+              Strategies for maximizing Airbnb and VRBO yields while navigating
+              local regulations and maintaining property standards.
+            </p>
+            <a href="./404.html" class="read-more-btn">Read Article</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="sidebar reveal" style="animation-delay: 0.4s">
+        <!-- Search Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Search Insights</h3>
+          <div class="search-box">
+            <input type="text" placeholder="Search keywords..." />
+            <button class="search-btn">Go</button>
+          </div>
+        </div>
+
+        <!-- Category Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Categories</h3>
+          <ul class="category-list">
+            <li>
+              <a href="./404.html">Market Analysis <span>(12)</span></a>
+            </li>
+            <li>
+              <a href="./404.html">Luxury Portfolio <span>(8)</span></a>
+            </li>
+            <li>
+              <a href="./404.html">Mortgage Advice <span>(15)</span></a>
+            </li>
+            <li>
+              <a href="./404.html">Interior Design <span>(9)</span></a>
+            </li>
+            <li>
+              <a href="./404.html">Legal Updates <span>(4)</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Popular Tags</h3>
+          <div class="tags-cloud">
+            <a href="./404.html" class="tag">RealEstate</a>
+            <a href="./404.html" class="tag">Luxury</a>
+            <a href="./404.html" class="tag">ROI</a>
+            <a href="./404.html" class="tag">HomeBuying</a>
+            <a href="./404.html" class="tag">ModernLiving</a>
+            <a href="./404.html" class="tag">Sustainability</a>
+            <a href="./404.html" class="tag">SmartHome</a>
+          </div>
+        </div>
+
+        <!-- Featured Property Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Featured Property</h3>
+          <div class="featured-prop">
+            <img src="./assets/404.webp" alt="Featured" />
+            <div class="prop-info">
+              <h4>The Glass House</h4>
+              <span>$4,250,000</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+    <!-- Top CTA Bar -->
+    <div class="stkq-cta-wrapper">
+      <div class="stkq-cta-bar">
+        <div class="stkq-cta-content">
+          <h2>Looking for a dream home?</h2>
+          <p>We can help you realize your dream of a new home</p>
+        </div>
+        <a href="./property.html" class="stkq-cta-btn">
+          Explore Properties
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="stkq-footer-container">
+      <div class="stkq-footer-grid">
+        <!-- Col 1: Logo & Contact -->
+        <div class="stkq-footer-col">
+          <a href="./index.html">
+            <img
+              src="./assets/logo.webp"
+              alt="Quarter Logo"
+              class="stkq-logo-placeholder"
+          /></a>
+          <p class="stkq-description">
+            Lorem Ipsum is simply dummy text of the and typesetting industry.
+            Lorem Ipsum is dummy text of the printing.
+          </p>
+          <ul class="stkq-contact-info">
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Brooklyn, New York, United States</span>
+            </li>
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+              <span>+0123-456789</span>
+            </li>
+            <li>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>example@example.com</span>
+            </li>
+          </ul>
+          <div class="stkq-social-row">
+            <a href="./404.html" class="stkq-social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="./404.html" class="stkq-social-icon" aria-label="Twitter">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                ></path>
+              </svg>
+            </a>
+            <a href="./404.html" class="stkq-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"
+                ></path>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="./404.html"
+              class="stkq-social-icon"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Company -->
+        <div class="stkq-footer-col">
+          <h4>Company</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./blog.html">Blog</a></li>
+            <li><a href="./property.html">Properties</a></li>
+            <li><a href="./404.html">Locations Map</a></li>
+            <li><a href="./404.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="stkq-footer-col">
+          <h4>Services</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./404.html">Order tracking</a></li>
+            <li><a href="./404.html">Wish List</a></li>
+            <li><a href="./login.html">Login</a></li>
+            <li><a href="./404.html">My account</a></li>
+            <li><a href="./404.html">Terms & Conditions</a></li>
+            <li><a href="./404.html">Promotional Offers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Customer Care -->
+        <div class="stkq-footer-col">
+          <h4>Customer Care</h4>
+          <ul class="stkq-footer-links">
+            <li><a href="./login.html">Login</a></li>
+            <li><a href="./404.html">My account</a></li>
+            <li><a href="./404.html">Wish List</a></li>
+            <li><a href="./404.html">Order tracking</a></li>
+            <li><a href="./404.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact us</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Newsletter -->
+        <div class="stkq-footer-col">
+          <h4>Newsletter</h4>
+          <p class="stkq-newsletter-text">
+            Subscribe to our weekly Newsletter and receive updates via email.
+          </p>
+          <form class="stkq-newsletter-form" action="./404.html">
+            <input
+              type="email"
+              class="stkq-newsletter-input"
+              placeholder="Email*"
+              required
+            />
+            <button
+              type="submit"
+              class="stkq-newsletter-submit"
+              aria-label="Subscribe"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+          <div class="stkq-payment-methods">
+            <span class="stkq-payment-label">We Accept</span>
+            <div class="stkq-payment-img-container">
+              <!-- Placeholder for payment icons -->
+              <span style="font-size: 10px; opacity: 0.5">PAYMENTS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bottom Copyright Bar -->
+    <div class="stkq-bottom-bar">
+      <div class="stkq-bottom-inner">
+        <p>&copy; All Rights Reserved @ Company 2026</p>
+        <div class="stkq-legal-links">
+          <a href="./404.html">Terms & Conditions</a>
+          <a href="./404.html">Claim</a>
+          <a href="./404.html">Privacy & Policy</a>
+        </div>
+      </div>
+      <!-- Scroll to top button -->
+      <div
+        class="stkq-scroll-top"
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        title="Go to top"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </div>
+    </div>
+    <script>
+      // Simple Intersection Observer for Fade-in effects
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            // Once visible, no need to observe anymore
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".reveal").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

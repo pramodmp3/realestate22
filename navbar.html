@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Real Estate Navbar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #1a1a1a;
+        --accent-color: #c5a059;
+        --text-light: #ffffff;
+        --text-dark: #1a1a1a;
+        --nav-height-desktop: 80px;
+        --nav-height-mobile: 70px;
+        --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f4f4f4;
+        height: 200vh;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      .hero-mock {
+        height: 100vh;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        height: var(--nav-height-desktop);
+        display: flex;
+        align-items: center;
+        transition: var(--transition);
+        padding: 0 5%;
+      }
+
+      .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        height: 70px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        height: 45px;
+        width: auto;
+        transition: var(--transition);
+        display: block;
+      }
+
+      .navbar.scrolled .logo {
+        height: 38px;
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: 40px;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--text-light);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 0;
+      }
+
+      .navbar.scrolled .nav-link {
+        color: var(--text-dark);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent-color);
+        transition: var(--transition);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .dropdown-icon {
+        width: 10px;
+        height: 10px;
+        fill: currentColor;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: -20px;
+        background: #fff;
+        min-width: 200px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(15px);
+        transition: var(--transition);
+        list-style: none;
+        padding: 15px 0;
+        border-radius: 4px;
+      }
+
+      .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-item:hover .dropdown-icon {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-item a {
+        display: block;
+        padding: 12px 25px;
+        text-decoration: none;
+        color: var(--text-dark);
+        font-size: 13px;
+        transition: background 0.3s;
+      }
+
+      .dropdown-item a:hover {
+        background: #f8f8f8;
+        color: var(--accent-color);
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 1001;
+        background: none;
+        border: none;
+      }
+
+      .hamburger span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: var(--text-light);
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+
+      .navbar.scrolled .hamburger span {
+        background-color: var(--text-dark);
+      }
+
+      .mobile-overlay {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--primary-color);
+        z-index: 1100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        padding: 40px;
+      }
+
+      .mobile-overlay.active {
+        right: 0;
+      }
+
+      .mobile-close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .mobile-close svg {
+        width: 30px;
+        height: 30px;
+        stroke: #fff;
+      }
+
+      .mobile-menu {
+        list-style: none;
+        text-align: center;
+      }
+
+      .mobile-menu-item {
+        margin: 25px 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+
+      .mobile-overlay.active .mobile-menu-item {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .mobile-menu-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 32px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .mobile-submenu {
+        margin-top: 15px;
+        list-style: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      .mobile-submenu.active {
+        max-height: 200px;
+      }
+
+      .mobile-submenu-link {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        margin: 10px 0;
+      }
+
+      @media (max-width: 1024px) {
+        .nav-menu {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .navbar {
+          height: var(--nav-height-mobile);
+          padding: 0 25px;
+        }
+        .logo {
+          height: 35px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="./home2.html">
+          <img src="./assets/logo.webp" alt="Logo" class="logo" id="logo-img" />
+        </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="./index.html" class="nav-link">
+              Home
+              <svg class="dropdown-icon" viewBox="0 0 20 20">
+                <path
+                  d="M5 7l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+              </svg>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="./index.html">Home 1 - Residential</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="./home2.html">Home 2 - Commercial</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="./services2.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="./about2.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="./blog2.html" class="nav-link">Insights</a>
+          </li>
+          <li class="nav-item">
+            <a href="./contact2.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <button class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+      <button class="mobile-close" id="mobileClose">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M18 6L6 18M6 6L18 18"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <ul class="mobile-menu">
+        <li class="mobile-menu-item" style="transition-delay: 0.1s">
+          <a href="#" class="mobile-menu-link" id="mobileHomeToggle">Home +</a>
+          <ul class="mobile-submenu" id="mobileHomeSub">
+            <li>
+              <a href="./index.html" class="mobile-submenu-link">Home 1</a>
+            </li>
+            <li>
+              <a href="./home2.html" class="mobile-submenu-link">Home 2</a>
+            </li>
+          </ul>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.2s">
+          <a href="./services2.html" class="mobile-menu-link">Services</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.3s">
+          <a href="./about2.html" class="mobile-menu-link">About</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.4s">
+          <a href="./blog2.html" class="mobile-menu-link">Insights</a>
+        </li>
+        <li class="mobile-menu-item" style="transition-delay: 0.5s">
+          <a href="./contact2.html" class="mobile-menu-link">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+    <section class="hero-mock">
+      <div>
+        <h1
+          style="
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 300;
+            margin-bottom: 20px;
+          "
+        >
+          Modern Living
+        </h1>
+        <p style="font-size: 1.2rem; opacity: 0.8; letter-spacing: 2px">
+          LUXURY REAL ESTATE & CONSTRUCTION
+        </p>
+      </div>
+    </section>
+
+    <script>
+      const navbar = document.getElementById("navbar");
+      const logoImg = document.getElementById("logo-img");
+      const hamburger = document.getElementById("hamburger");
+      const mobileOverlay = document.getElementById("mobileOverlay");
+      const mobileClose = document.getElementById("mobileClose");
+      const mobileHomeToggle = document.getElementById("mobileHomeToggle");
+      const mobileHomeSub = document.getElementById("mobileHomeSub");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+          logoImg.src = logoImg.src.replace("white", "black");
+        } else {
+          navbar.classList.remove("scrolled");
+          logoImg.src = logoImg.src.replace("black", "white");
+        }
+      });
+
+      const openMenu = () => {
+        mobileOverlay.classList.add("active");
+        document.body.classList.add("menu-open");
+      };
+
+      const closeMenu = () => {
+        mobileOverlay.classList.remove("active");
+        document.body.classList.remove("menu-open");
+      };
+
+      hamburger.addEventListener("click", openMenu);
+      mobileClose.addEventListener("click", closeMenu);
+
+      mobileHomeToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        mobileHomeSub.classList.toggle("active");
+        mobileHomeToggle.textContent = mobileHomeSub.classList.contains(
+          "active",
+        )
+          ? "Home -"
+          : "Home +";
+      });
+
+      document
+        .querySelectorAll(".mobile-menu-link, .mobile-submenu-link")
+        .forEach((link) => {
+          if (link.id !== "mobileHomeToggle") {
+            link.addEventListener("click", closeMenu);
+          }
+        });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === mobileOverlay) closeMenu();
+      });
+    </script>
+  </body>
+</html>

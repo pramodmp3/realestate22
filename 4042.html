@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Not Found | Luxury Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-red: #ff4d4d;
+        --text-dark: #1a1a1a;
+        --text-muted: #666666;
+        --bg-light: #f9f9f9;
+        --border-color: #eeeeee;
+        --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        overflow: hidden;
+        line-height: 1.6;
+      }
+
+      .error-container {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        /* Blueprint background grid using --border-color */
+        background-image:
+          linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      .blueprint-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.6;
+      }
+
+      .watermark {
+        position: absolute;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(10rem, 30vw, 25rem);
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.03);
+        user-select: none;
+        z-index: 0;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 600px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 1s forwards 0.2s;
+      }
+
+      .label {
+        display: inline-block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--primary-red);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        padding: 0 1rem;
+        font-weight: 400;
+      }
+
+      .illustration {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .house-icon {
+        width: 80px;
+        height: 80px;
+        stroke: var(--text-dark);
+        fill: none;
+        stroke-width: 1.2;
+        stroke-dasharray: 300;
+        animation: draw 3s ease-in-out forwards;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .btn {
+        position: relative;
+        display: inline-block;
+        padding: 16px 40px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: var(--transition);
+        z-index: 1;
+        width: 100%;
+        max-width: 280px;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background: var(--text-dark);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Left-to-right fill animation using primary-red */
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-red);
+        transition: var(--transition);
+        z-index: -1;
+      }
+
+      .btn-primary:hover::before {
+        left: 0;
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-dark);
+        border-color: var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--text-dark);
+        background: rgba(0, 0, 0, 0.02);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes draw {
+        from {
+          stroke-dashoffset: 300;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .button-group {
+          flex-direction: row;
+          justify-content: center;
+        }
+        .btn {
+          width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="error-container">
+      <div class="watermark">404</div>
+
+      <div class="blueprint-lines">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="grid"
+              width="200"
+              height="200"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 200 0 L 0 0 0 200"
+                fill="none"
+                stroke="var(--border-color)"
+                stroke-width="1.5"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div class="content">
+        <div class="illustration">
+          <svg
+            class="house-icon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+            <line x1="14" y1="2" x2="14" y2="5" stroke-dasharray="2,2" />
+          </svg>
+        </div>
+
+        <span class="label">404 Error</span>
+        <h1>This Property Is Off The Market</h1>
+        <p>
+          The listing you're looking for might have been sold, removed, or the
+          address was entered incorrectly.
+        </p>
+
+        <div class="button-group">
+          <a href="./home2.html" class="btn btn-primary">Back to Home</a>
+          <a href="./services2.html" class="btn btn-secondary"
+            >Browse Properties</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("mousemove", (e) => {
+        const watermark = document.querySelector(".watermark");
+        const x = (window.innerWidth - e.pageX * 2) / 100;
+        const y = (window.innerHeight - e.pageY * 2) / 100;
+        watermark.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    </script>
+  </body>
+</html>
